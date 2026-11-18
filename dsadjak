@@ -12,18 +12,18 @@ def update():
     global keys, oldkeys
     
     if oldkeys == keys:
+        if keys:
+            print("[",end="")
+            for key in keys:
+                print(key,end="")
+            print("]")
+        
         keys = []
         
     oldkeys = keys.copy()
-
-    if keys:
-        print("[",end="")
-        for key in keys:
-            print(key,end="")
-        print("]")
-        
-    time = max(500,  50*len(keys) + 100)
-    root.after(100,update)
+   
+    time = 250
+    root.after(time,update)
 
 update()
 root.mainloop()
