@@ -1,0 +1,29 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.withdraw()
+
+keys = []
+oldkeys = keys.copy()
+
+root.bind("<KeyPress>", lambda event: keys.append(event.keysym))
+
+def update():
+    global keys, oldkeys
+    
+    if oldkeys == keys:
+        keys = []
+        
+    oldkeys = keys.copy()
+
+    if keys:
+        print("[",end="")
+        for key in keys:
+            print(key,end="")
+        print("]")
+        
+    time = max(500,  50*len(keys) + 100)
+    root.after(100,update)
+
+update()
+root.mainloop()
